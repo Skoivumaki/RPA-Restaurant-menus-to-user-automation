@@ -6,6 +6,7 @@ import * as fs from 'fs';
 import promptSync from 'prompt-sync';
 import fetch from "node-fetch";
 import * as cheerio from 'cheerio';
+import { createTransport } from 'nodemailer';
 
 const getMenu = async () => {
 
@@ -47,22 +48,16 @@ const getMenu = async () => {
                     console.log(trim);
                 }
             });
-            const titleText = titleNode.text();
-            titleList.push(titleText);
         }
     });
-    console.log(titleList);
     return menuList;
 };
 
 const prompt = promptSync();
-let message;
-const result = prompt(message);
-
 const input = prompt('Input?');
 console.log(`Chosen ${input}`);
   
-  switch (input) {
+switch (input) {
     case "1":
         fs.readFile("output.txt", (err, data) => {
             if (err) {
@@ -76,28 +71,29 @@ console.log(`Chosen ${input}`);
             start(data);
         });;
     case "2":
-        //getMenu();
-        console.log("Return: "+(await getMenu()).join("\n"));
+        const result = (await getMenu()).join("\n");
+        //console.log("Return: "+result);
+        nodemailer(result);
         break;
     default:
         break;
-  }
+}
 
-function nodemailer() {
+function nodemailer(result) {
     const transporter = createTransport({
-        host: "smtp-relay.sendinblue.com",
+        host: "smtp-relay.brevo.com",
         port: 587,
         auth: {
-            user: "<your-login>",
-            pass: "<your-key>",
+            user: process.env.user,
+            pass: process.env.pass,
         },
     });
     
     const mailOptions = {
-        from: '<your-login>',
-        to: '<your-receiver>',
-        subject: `Your subject`,
-        text: `Your text content`
+        from: process.env.login,
+        to: process.env.receiver,
+        subject: "Lounas menut tänään",
+        text: result
     };
     
     transporter.sendMail(mailOptions, function(error, info){
