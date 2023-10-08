@@ -128,7 +128,7 @@ function nodemailer(result, receiver, weatherCurrent) {
   }).then(res => {
     console.log(res.data.choices[0].message.content);
     const weather = res.data.choices[0].message.content;
-    const emailmessage = result + '<br>' + weather + '<br><a href="http://127.0.0.1:8080/"' + receiver + '>Paina tästä jos haluat lounas menun nyt siellä missä olet</a>'
+    const emailmessage = result + '<br>' + weather + '<br><a href="https://rpa-restaurant-menu.onrender.com"' + receiver + '>Paina tästä jos haluat lounas menun nyt siellä missä olet</a>'
     emailmessage.toString;
     console.log(emailmessage.toString);
     const transporter = createTransport({
