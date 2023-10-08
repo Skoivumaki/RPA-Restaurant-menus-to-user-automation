@@ -5,10 +5,10 @@ import * as cheerio from 'cheerio';
 import { createTransport } from 'nodemailer';
 import { config } from "dotenv"
 import { setInterval } from "timers/promises";
-config()
+config("/.env")
 const app = express();
 var lastRun;
-
+console.log(process.env.receiver1);
 //function to get location of user
 async function getLocation(userIP) {
   //debug
