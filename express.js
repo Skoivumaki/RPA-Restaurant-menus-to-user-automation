@@ -12,9 +12,9 @@ var lastRun;
 //function to get location of user
 async function getLocation(userIP) {
   //debug
-  const localdebugip = "91.153.222.47"
+  //const localdebugip = "91.153.222.47"
 
-  const fetch_res = await fetch('https://ipapi.co/' + localdebugip + '/json/');
+  const fetch_res = await fetch('https://ipapi.co/' + userIP + '/json/');
   const fetch_data = await fetch_res.json();
   const city = (fetch_data["city"]).toLowerCase();
   console.log('User IP: ' + userIP);
