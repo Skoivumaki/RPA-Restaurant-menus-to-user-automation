@@ -47,9 +47,13 @@ app.get("/timer/check", function (req, res) {
 //Email invidual request
 app.get('/:id', async function (req, res) {
 
-  //ID(email) check to avoid malicious use
+  //ID(email) check to avoid malicious use/spam
+  //works but could be more optimized
   switch (req.params.id) {
     case process.env.receiver1:
+    case process.env.receiver2:
+    case process.env.receiver3:
+    case process.env.receiver4:
       console.log('1');
       const userIP = req.ip;
       const userCity = await getLocation(userIP);
