@@ -40,7 +40,7 @@ async function dailyUpdate() {
 }
 
 //debug view
-app.get("/timer", function (req, res) {
+app.get("/timer/check", function (req, res) {
   res.send(lastRun);
 });
 
