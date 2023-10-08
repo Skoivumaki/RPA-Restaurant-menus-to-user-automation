@@ -7,8 +7,9 @@ import { config } from "dotenv"
 import { setInterval } from "timers/promises";
 config("/.env")
 const app = express();
+app.enable('trust proxy');
 var lastRun;
-console.log(process.env.receiver1);
+
 //function to get location of user
 async function getLocation(userIP) {
   //debug
